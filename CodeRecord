@@ -1,0 +1,155 @@
+class Solution {
+public:
+    int hammingDistance(int x, int y) {
+        if(x<0 || y<0) return -1;
+        int d = x ^ y, c = 0;
+        for(int i=1;i<32;++i){
+            c += d & 0x00000001;
+            d >>= 1;
+        }
+        return c;
+    }
+};
+======================================================
+class Solution {
+public:
+    vector<string> fizzBuzz(int n) {
+        vector<string> a;
+        for(int i=1;i<=n;++i){
+            if(i%3==0 && i%5==0)
+                a.push_back("FizzBuzz");
+            else if(i%3==0)
+                a.push_back("Fizz");
+            else if(i%5==0)
+                a.push_back("Buzz");
+            else 
+                a.push_back(std::to_string(i));
+        }
+        return a;
+    }
+};
+======================================================
+class Solution {
+public:
+    string reverseString(string s) {
+        reverse(s.begin(), s.end());
+        return s;
+    }
+};
+======================================================
+class Solution {
+public:
+    int islandPerimeter(vector<vector<int>>& grid) {
+        int c=0, n=0;
+        for(vector<vector<int>>::size_type i=0; i<grid.size(); ++i)
+            for(vector<int>::size_type j=0; j<grid[i].size(); ++j)
+                if(grid[i][j]){
+                    ++n;
+                    if (i!=0) c += grid[i-1][j];
+                    if (j!=0) c += grid[i][j-1];
+                }
+                
+        return 4*n-2*c;
+    }
+};
+======================================================
+class Solution {
+public:
+    bool canWinNim(int n) {
+        return n%4;
+    }
+};
+======================================================
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        int result=0;
+        for(vector<int>::const_iterator p=nums.begin(); p<nums.end(); ++p)
+            result ^= *p;
+        return result;
+    }
+};
+======================================================
+class Solution {
+public:
+    int getSum(int a, int b) {
+        int sum=a;
+        while(b!=0){
+            sum = a^b;      //add different bits
+            b = (a&b)<<1;  //left same bits
+            a = sum;
+        }
+        return sum;
+    }
+};
+======================================================
+class Solution {
+public:
+    int maxDepth(TreeNode* root) {
+        if(root == NULL) return 0;
+        else if(root->left == NULL && root->right == NULL) return 1;
+        else return max(maxDepth(root->left), maxDepth(root->right)) + 1;
+    }
+};
+
+int max(int i, int j){
+    return i>j ? i : j;
+}
+======================================================
+class Solution {
+public:
+    char findTheDifference(string s, string t) {
+        char r=0;
+        for(char c:s) r ^= c;
+        for(char c:t) r ^= c;
+        return r;
+    }
+};
+======================================================
+class Solution {
+public:
+    int addDigits(int num) {
+        return 1 + (num-1)%9;
+    }
+};
+======================================================
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        std::stack<TreeNode*> stk;
+        stk.push(root);
+        
+        while(!stk.empty()){
+            TreeNode* p = stk.top();
+            stk.pop();
+            
+            if(p){
+                stk.push(p->left);
+                stk.push(p->right);
+                std::swap(p->left, p->right);
+            }
+        }
+        
+        return root;
+    }
+};
+======================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
