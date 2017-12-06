@@ -1,0 +1,26 @@
+template <class T>
+void FindMaxSum(T* p_array, int len, int* beg, int* end, T* p_max_sum) {
+	if (len <= 0)
+		return;
+
+	*p_max_sum = *p_array;
+	T curr_sum(*p_max_sum);
+	T temp;
+	*beg = *end = 0;
+
+	for (int i = 1; i < len; ++i) {
+		temp = *(p_array + i);
+		if (curr_sum < 0 && temp >= 0) {
+			curr_sum = temp;
+			*beg = *end = i;
+		}
+		else {
+			curr_sum += temp;
+		}
+
+		if (*(p_max_sum) < curr_sum) {
+			*(p_max_sum) = curr_sum;
+			*end = i;
+		}
+	}
+}
